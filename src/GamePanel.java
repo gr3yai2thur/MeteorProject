@@ -1,6 +1,5 @@
 import javax.swing.JPanel;
 import java.awt.Toolkit;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -12,11 +11,11 @@ public class GamePanel extends JPanel{
     private int meteorCount;
     private int[] posX;
     private int[] posY;
+    private int[] meteorTypes;
+    private boolean[] alive;
     private Image bomb, bg;
 
     public GamePanel(int meteorCount){
-        // พื้นหลังดำ
-        setBackground(Color.BLACK);
 
         // Array รูปอุกาบาต
         meteorImg[0] = Toolkit.getDefaultToolkit().getImage(
@@ -72,10 +71,17 @@ public class GamePanel extends JPanel{
         this.meteorCount = meteorCount;
         posX = new int[meteorCount];
         posY = new int[meteorCount];
+        alive = new boolean[meteorCount];
+        meteorTypes = new int[meteorCount];
 
         for(int i=0; i<meteorCount; i++){
-            posX[i] = setPosX(i, rnd().nextInt(1340));
-            posY[i] = setPosY(i, rnd().nextInt(800));;
+            posX[i] = setPosX(i, rnd().nextInt(1200));
+            posY[i] = setPosY(i, rnd().nextInt(650));
+            alive[i] = true;
+            meteorTypes[i] = randomMeteor();
+        }
+        for(int i=0; i<meteorCount; i++){
+            new Meteors(this, i, meteorCount).start();
         }
     }
 
@@ -84,12 +90,12 @@ public class GamePanel extends JPanel{
         super.paintComponent(g);
         g.drawImage(bg, 0, 0, this);
         for(int i=0;i<meteorCount; i++){
-            g.drawImage(meteorImg[randomMeteor()], posX[i], posY[i], this);
+            if (!alive[i]) continue;
+            g.drawImage(meteorImg[meteorTypes[i]], posX[i], posY[i], this);
         }
     }
 
     public int randomMeteor(){
-        Random rnd = new Random();
         return rnd.nextInt(10);
     }
 
@@ -109,6 +115,9 @@ public class GamePanel extends JPanel{
     public int getPosY(int i){
         return posY[i];
     }
+    public boolean isAlive(int i){
+        return alive[i];
+    }
 
     // Setter Method
     public int setPosX(int i, int x){
@@ -116,5 +125,8 @@ public class GamePanel extends JPanel{
     }
     public int setPosY(int i, int x){
         return posY[i] = x;
+    }
+    public boolean setAlive(int i, boolean x){
+        return alive[i] = x;
     }
 }
