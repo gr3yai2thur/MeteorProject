@@ -23,37 +23,43 @@ public class Meteors extends Thread {
         pX = gamePanel.getPosX(index);
         pY = gamePanel.getPosY(index);
 
-        double speed = rnd.nextDouble()*2+1;  // 1-3
-        double angle = rnd.nextDouble()*2*Math.PI;
+        double speed = rnd.nextDouble() * 2 + 1;  // 1-3
+        double angle = rnd.nextDouble() * 2 * Math.PI;
+        
         vX = Math.cos(angle) * speed;
         vY = Math.sin(angle) * speed;
     }
 
     @Override
     public void run() {
-        while (!isInterrupted() && gamePanel.isAlive(index)) {
+        while (gamePanel.isAlive(index)) {
             int panelWidth = gamePanel.getWidth();
             int panelHeight = gamePanel.getHeight();
 
             if (panelWidth > 0 && panelHeight > 0) {
-                int maxX = Math.max(0, panelWidth - 100);
-                int maxY = Math.max(0, panelHeight - 150);
+                int maxX = panelWidth - 100;
+                int maxY = panelHeight - 150;
 
                 pX += vX;
                 pY += vY;
 
                 boolean hitWall = false;
                 if (pX < 0 || pX > maxX) {
+
+                    // มุมสะท้อน = มุมตกกระทบ by ครูสามารถ cws
                     vX = -vX;
                     pX = Math.max(0, Math.min(pX, maxX));
                     hitWall = true;
                 }
                 if (pY < 0 || pY > maxY) {
+
+                    // มุมสะท้อน = มุมตกกระทบ by ครูสามารถ cws
                     vY = -vY;
                     pY = Math.max(0, Math.min(pY, maxY));
                     hitWall = true;
                 }
-                if (hitWall) {speedUp();}
+
+                if (hitWall) speedUp();
 
                 gamePanel.setPosX(index, (int) pX);
                 gamePanel.setPosY(index, (int) pY);
@@ -91,7 +97,7 @@ public class Meteors extends Thread {
             if (!gamePanel.isAlive(j)) continue;
 
             double dx = cx - (gamePanel.getPosX(j) + 100 / 2.0);
-            double dy = cy - (gamePanel.getPosY(j) + 150 / 2.0);
+            double dy = cy - (gamePanel.getPosY(j) + 100 / 2.0);
 
             if (dx * dx + dy * dy < minDist * minDist) {
                 gamePanel.setAlive(index, false);
@@ -107,8 +113,8 @@ public class Meteors extends Thread {
     private void explode(int cx, int cy) {
         new Thread(() -> {
             ImageIcon icon = new ImageIcon(gamePanel.getBombEffect());
-            int w = icon.getIconWidth() > 0 ? icon.getIconWidth() : 80;
-            int h = icon.getIconHeight() > 0 ? icon.getIconHeight() : 80;
+            int w = icon.getIconWidth();
+            int h = icon.getIconHeight();
 
             JLabel boom = new JLabel(icon);
             boom.setBounds(cx - w / 2, cy - h / 2, w, h);

@@ -75,8 +75,8 @@ public class GamePanel extends JPanel{
         meteorTypes = new int[meteorCount];
 
         for(int i=0; i<meteorCount; i++){
-            posX[i] = setPosX(i, rnd().nextInt(1200));
-            posY[i] = setPosY(i, rnd().nextInt(650));
+            setPosX(i, rnd().nextInt(1200));
+            setPosY(i, rnd().nextInt(650));
             alive[i] = true;
             meteorTypes[i] = randomMeteor();
         }
@@ -120,13 +120,13 @@ public class GamePanel extends JPanel{
     }
 
     // Setter Method
-    public int setPosX(int i, int x){
-        return posX[i] = x;
+    public void setPosX(int i, int x){
+        posX[i] = x;
     }
-    public int setPosY(int i, int x){
-        return posY[i] = x;
+    public void setPosY(int i, int x){
+        posY[i] = x;
     }
-    public boolean setAlive(int i, boolean x){
-        return alive[i] = x;
+    public void setAlive(int i, boolean x){
+        alive[i] = x;
     }
 }
