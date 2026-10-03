@@ -20,19 +20,22 @@ public class MainGame extends JFrame{
     }
 
     public static void main(String[] args) {
-        UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.PLAIN, 16));
-        UIManager.put("OptionPane.buttonFont", new Font("Tahoma", Font.PLAIN, 14));
-
-        String input = JOptionPane.showInputDialog(null, "กรุณากรอกจำนวนอุกกาบาต:", "ตั้งค่าเกม", JOptionPane.QUESTION_MESSAGE);
-
-        int meteorCount = 10;
-        try {
-            if (input != null) {
-                meteorCount = Integer.parseInt(input);
+        int meteorCount = 0;
+        do {
+            UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.PLAIN, 16));
+            UIManager.put("OptionPane.buttonFont", new Font("Tahoma", Font.PLAIN, 14));
+    
+            String input = JOptionPane.showInputDialog(null, "กรุณากรอกจำนวนอุกกาบาต:", "ตั้งค่าเกม", JOptionPane.QUESTION_MESSAGE);
+    
+            try {
+                if (input != null) {
+                    meteorCount = Integer.parseInt(input);
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "กรอกไม่ถูกต้อง!", "ข้อผิดพลาด", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "กรอกไม่ถูกต้อง! ใช้ค่าเริ่มต้น = 10", "ข้อผิดพลาด", JOptionPane.ERROR_MESSAGE);
-        }
+            
+        } while (meteorCount == 0);
 
         new MainGame(meteorCount);
     }

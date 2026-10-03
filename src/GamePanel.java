@@ -20,43 +20,43 @@ public class GamePanel extends JPanel{
         // Array รูปอุกาบาต
         meteorImg[0] = Toolkit.getDefaultToolkit().getImage(
             System.getProperty("user.dir") + File.separator + "images"
-                + File.separator + "asteroid1.png"
+                + File.separator + "meteor1.png"
         );
         meteorImg[1] = Toolkit.getDefaultToolkit().getImage(
             System.getProperty("user.dir") + File.separator + "images"
-                + File.separator + "asteroid2.png"
+                + File.separator + "meteor2.png"
         );
         meteorImg[2] = Toolkit.getDefaultToolkit().getImage(
             System.getProperty("user.dir") + File.separator + "images"
-                + File.separator + "asteroid3.png"
+                + File.separator + "meteor3.png"
         );
         meteorImg[3] = Toolkit.getDefaultToolkit().getImage(
             System.getProperty("user.dir") + File.separator + "images"
-                + File.separator + "asteroid4.png"
+                + File.separator + "meteor4.png"
         );
         meteorImg[4] = Toolkit.getDefaultToolkit().getImage(
             System.getProperty("user.dir") + File.separator + "images"
-                + File.separator + "asteroid5.png"
+                + File.separator + "meteor5.png"
         );
         meteorImg[5] = Toolkit.getDefaultToolkit().getImage(
             System.getProperty("user.dir") + File.separator + "images"
-                + File.separator + "asteroid6.png"
+                + File.separator + "meteor6.png"
         );
         meteorImg[6] = Toolkit.getDefaultToolkit().getImage(
             System.getProperty("user.dir") + File.separator + "images"
-                + File.separator + "asteroid7.png"
+                + File.separator + "meteor7.png"
         );
         meteorImg[7] = Toolkit.getDefaultToolkit().getImage(
             System.getProperty("user.dir") + File.separator + "images"
-                + File.separator + "asteroid8.png"
+                + File.separator + "meteor8.png"
         );
         meteorImg[8] = Toolkit.getDefaultToolkit().getImage(
             System.getProperty("user.dir") + File.separator + "images"
-                + File.separator + "asteroid9.png"
+                + File.separator + "meteor9.png"
         );
         meteorImg[9] = Toolkit.getDefaultToolkit().getImage(
             System.getProperty("user.dir") + File.separator + "images"
-                + File.separator + "asteroid10.png"
+                + File.separator + "meteor10.png"
         );
         bg = Toolkit.getDefaultToolkit().getImage(
             System.getProperty("user.dir") + File.separator + "images"
