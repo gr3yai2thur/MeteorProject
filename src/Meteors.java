@@ -9,11 +9,10 @@ public class Meteors extends Thread {
     private final int index;
     private final int meteorCount;
     private final Random rnd = new Random();
-
-    private double pX;
-    private double pY;                
     private double vX;
-    private double vY;                
+    private double vY;
+    private double pX;
+    private double pY;              
 
     public Meteors(GamePanel gamePanel, int index, int meteorCount) {
         this.gamePanel = gamePanel;
@@ -23,11 +22,8 @@ public class Meteors extends Thread {
         pX = gamePanel.getPosX(index);
         pY = gamePanel.getPosY(index);
 
-        double speed = rnd.nextDouble() * 2 + 1;  // 1-3
-        double angle = rnd.nextDouble() * 2 * Math.PI;
-        
-        vX = Math.cos(angle) * speed;
-        vY = Math.sin(angle) * speed;
+        vX = rnd.nextBoolean() ? rnd.nextDouble() * 2 + 1 : -rnd.nextDouble() * 2 + 1;  // -3 ถึง 3
+        vY = rnd.nextBoolean() ? rnd.nextDouble() * 2 + 1 : -rnd.nextDouble() * 2 + 1;
     }
 
     @Override
@@ -78,28 +74,26 @@ public class Meteors extends Thread {
     }
 
     private void speedUp() {
-        double speed = Math.sqrt(vX * vX + vY * vY);
-        if (speed <= 0) return;
-        double newSpeed = Math.min(speed * 1.3, 7);
-        vX = vX / speed * newSpeed;
-        vY = vY / speed * newSpeed;
+        vX = Math.min(vX * 1.3, 7);
+        vY = Math.min(vY * 1.3, 7);
     }
 
     private boolean checkCollision() {
-        double minDist = 100 * 0.8;
-
         if (!gamePanel.isAlive(index)) return true;
 
+        // ตรงกลางของอุกาบาต
         double cx = pX + 100 / 2.0;
         double cy = pY + 100 / 2.0;
 
         for (int j = index + 1; j < meteorCount; j++) {
             if (!gamePanel.isAlive(j)) continue;
 
+            //
             double dx = cx - (gamePanel.getPosX(j) + 100 / 2.0);
             double dy = cy - (gamePanel.getPosY(j) + 100 / 2.0);
 
-            if (dx * dx + dy * dy < minDist * minDist) {
+            // 100 มาจากรูปอุกาบาตเพราะมีขนาด 100x100
+            if (Math.abs(dx) < 100 && Math.abs(dy) < 100) {
                 gamePanel.setAlive(index, false);
                 int ex = (int) (cx - dx / 2);  
                 int ey = (int) (cy - dy / 2);
@@ -117,6 +111,8 @@ public class Meteors extends Thread {
             int h = icon.getIconHeight();
 
             JLabel boom = new JLabel(icon);
+
+            // วาดที่ซ้ายบน
             boom.setBounds(cx - w / 2, cy - h / 2, w, h);
 
             SwingUtilities.invokeLater(() -> {
