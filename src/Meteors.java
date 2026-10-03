@@ -34,7 +34,7 @@ public class Meteors extends Thread {
 
             if (panelWidth > 0 && panelHeight > 0) {
                 int maxX = panelWidth - 100;
-                int maxY = panelHeight - 150;
+                int maxY = panelHeight - 120;
 
                 pX += vX;
                 pY += vY;
