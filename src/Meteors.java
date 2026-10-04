@@ -22,8 +22,11 @@ public class Meteors extends Thread {
         pX = gamePanel.getPosX(index);
         pY = gamePanel.getPosY(index);
 
-        vX = rnd.nextBoolean() ? rnd.nextDouble() * 2 + 1 : -rnd.nextDouble() * 2 + 1;  // -3 ถึง 3
-        vY = rnd.nextBoolean() ? rnd.nextDouble() * 2 + 1 : -rnd.nextDouble() * 2 + 1;
+        if(rnd.nextBoolean()) vX = rnd.nextDouble() * 2 + 1;
+        else vX = -rnd.nextDouble() * 2 + 1;
+
+        if(rnd.nextBoolean()) vY = rnd.nextDouble() * 2 + 1;
+        else vY = -rnd.nextDouble() * 2 + 1;
     }
 
     @Override
