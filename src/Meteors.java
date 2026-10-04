@@ -5,10 +5,10 @@ import javax.swing.SwingUtilities;
 
 // 1 อุกกาบาต = 1 Thread (สร้างหลายตัวจาก GamePanel)
 public class Meteors extends Thread {
-    private final GamePanel gamePanel;
-    private final int index;
-    private final int meteorCount;
-    private final Random rnd = new Random();
+    private GamePanel gamePanel;
+    private int index;
+    private int meteorCount;
+    private Random rnd = new Random();
     private double vX;
     private double vY;
     private double pX;
@@ -76,12 +76,12 @@ public class Meteors extends Thread {
         }
     }
 
-    private void speedUp() {
+    public void speedUp() {
         vX = Math.min(vX * 1.3, 7);
         vY = Math.min(vY * 1.3, 7);
     }
 
-    private boolean checkCollision() {
+    public boolean checkCollision() {
         if (!gamePanel.isAlive(index)) return true;
 
         // ตรงกลางของอุกาบาต
@@ -107,7 +107,7 @@ public class Meteors extends Thread {
         return false;
     }
 
-    private void explode(int cx, int cy) {
+    public void explode(int cx, int cy) {
         new Thread(() -> {
             ImageIcon icon = new ImageIcon(gamePanel.getBombEffect());
             int w = icon.getIconWidth();
