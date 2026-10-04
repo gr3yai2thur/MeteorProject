@@ -25,14 +25,13 @@ public class MainGame extends JFrame{
             UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.PLAIN, 16));
             UIManager.put("OptionPane.buttonFont", new Font("Tahoma", Font.PLAIN, 14));
     
-            String input = JOptionPane.showInputDialog(null, "กรุณากรอกจำนวนอุกกาบาต:", "ตั้งค่าเกม", JOptionPane.QUESTION_MESSAGE);
+            String input = JOptionPane.showInputDialog(null, "กรุณากรอกจำนวนอุกกาบาต:", "ตั้งค่าจำนวนอุกาบาต", JOptionPane.QUESTION_MESSAGE);
     
             try {
-                if (input != null) {
-                    meteorCount = Integer.parseInt(input);
-                }
+                if (input != null) meteorCount = Integer.parseInt(input);
+                else return;
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "กรอกไม่ถูกต้อง!", "ข้อผิดพลาด", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "ค่าที่กรอกไม่ถูกต้อง! กรุณากรอกตัวเลข", "ข้อมูลผิดพลาด", JOptionPane.ERROR_MESSAGE);
             }
             
         } while (meteorCount == 0);
